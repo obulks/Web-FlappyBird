@@ -1,4 +1,6 @@
 // 下半部分水管
-export class DownPipe {
+import {Pipe} from "./Pipe.js"
+
+export class DownPipe extends Pipe{
   
 }
