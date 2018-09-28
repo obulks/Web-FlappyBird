@@ -52,6 +52,7 @@ export class Director {
     const birds = this.dataStore.get('birds').birdsArr[0]
     const land = this.dataStore.get('land')
     const pipes = this.dataStore.get('pipes')
+    const score = this.dataStore.get('score')
     if (birds[5] + birds[3] >= land.dy) {
       this.isGameOver = true
       return
@@ -94,6 +95,13 @@ export class Director {
         this.isGameOver = true
       }
     }
+
+    // 加分逻辑，在循环结束后编写
+    // 加分结束后加分开关为false，需要在下次加分前改为true，115行
+    if (birds[4] > pipes[0].pipeX + pipes[0].dw && score.isScore) {
+      score.isScore = false
+      score.scoreNumber++
+    }
   }
 
   run() {
@@ -104,6 +112,8 @@ export class Director {
       if (pipesArr[0].pipeX <= -52 && pipesArr.length === 4) {
         pipesArr.shift()
         pipesArr.shift()
+        // 在加分之前开启加分开关
+        this.dataStore.get('score').isScore = true
       }
       if (pipesArr[0].pipeX <= (200 - pipesArr[0].sw) / 2 && pipesArr.length === 2) {
         this.createPipe()
@@ -112,6 +122,7 @@ export class Director {
         value.draw()
       })
       this.dataStore.get('land').draw()
+      this.dataStore.get('score').draw()
       this.dataStore.get('birds').draw()
 
       let timer = requestAnimationFrame(() => this.run())

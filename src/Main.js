@@ -5,6 +5,7 @@ import {DataStore} from "./js/base/DataStore.js"
 import {Land} from "./js/runtime/Land.js"
 import {Birds} from "./js/player/Birds.js"
 import {StartButton} from "./js/player/StartButton.js"
+import {Score} from "./js/player/Score.js"
 
 export class Main {
   constructor() {
@@ -13,7 +14,7 @@ export class Main {
     this.dataStore = DataStore.getInstance()
     this.director = Director.getInstance()
     this.source = new Image()
-    this.source.src = './assets/img/source.png'
+    this.source.src = '/src/assets/img/source.png'
     this.source.onload = this.init()
   }
 
@@ -27,6 +28,7 @@ export class Main {
       .put('background', BackGround)
       .put('land', Land)
       .put('birds', Birds)
+      .put('score', Score)
       .put('startButton', StartButton)
     this.registerEvent()
     // 在游戏运行之前要创建好水管
@@ -35,7 +37,14 @@ export class Main {
   }
 
   registerEvent() {
-    this.canvas.addEventListener('touchstart', e => {
+    const clickEvent = (function () {
+      if ('ontouchstart' in document.documentElement === true)
+        return 'touchstart';
+      else
+        return 'click';
+    })();
+
+    this.canvas.addEventListener(clickEvent, e => {
       // 屏蔽事件冒泡
       e.preventDefault()
       if (this.director.isGameOver) {
