@@ -2,19 +2,10 @@ import {Sprite} from "../base/Sprite.js"
 import {Director} from "../Director.js"
 
 export class Pipe extends Sprite {
-  constructor(top) {
-    const image = Sprite.getImage()
-    super(image,
-      0,
-      0,
-      52,
-      320,
-      512,
-      0,
-      52,
-      320)
+  constructor(img, sx, sy, sw, sh, dx, dy, dw, dh, top) {
+    super(img, sx, sy, sw, sh, dx, dy, dw, dh)
     this.top = top
-    this.pipeX = 0
+    this.pipeX = 288
     this.pipeSpeed = Director.getInstance().moveSpeed
   }
 
