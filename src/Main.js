@@ -41,7 +41,7 @@ export class Main {
       if ('ontouchstart' in document.documentElement === true)
         return 'touchstart';
       else
-        return 'click';
+        return 'mousedown';
     })();
 
     this.canvas.addEventListener(clickEvent, e => {

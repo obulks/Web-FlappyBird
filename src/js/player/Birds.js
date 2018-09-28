@@ -26,16 +26,16 @@ export class Birds extends Sprite {
     this.index = Math.floor(this.count)
 
     // 重力加速度
-    const g = 0.98 / 18
+    const g = 0.98 / 30
 
     // 向上偏移量
-    const offsetUp = 20
+    const offsetUp = 24
     // 小鸟位移
     const offsetY = (g * this.time * (this.time - offsetUp)) / 2
     for (let i = 0; i <= 2; i++) {
       this.birdsArr[i][5] += offsetY
     }
     super.draw(this.img, ...this.birdsArr[this.index])
-    this.time += 0.8
+    this.time += 0.74
   }
 }
